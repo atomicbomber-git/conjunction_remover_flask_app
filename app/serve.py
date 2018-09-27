@@ -9,10 +9,10 @@ app = Flask(__name__)
 ct = CRFTagger()
 ct.set_model_file(os.path.dirname(os.path.abspath(__file__)) + '/all_indo_man_tag_corpus_model.crf.tagger')
 
-@app.route('/')
+@app.route('/', methods=['POST'])
 def process():
     # Tokenize input text
-    input_text = nltk.word_tokenize(request.args.get('input', ''))
+    input_text = nltk.word_tokenize(request.form.get('input', ''))
 
     # Tag sentence
     result = ct.tag_sents([input_text])
